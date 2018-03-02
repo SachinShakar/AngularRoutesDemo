@@ -1,12 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AccountsService } from "./accounts.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  numbers = [1, 2, 3, 4, 5];
-  onlyOdd = false;
-  value = 10;
+export class AppComponent implements OnInit {
+  accounts : {name : string, status : string} [] = [];
+
+  constructor(private accountsService : AccountsService){
+    this.accountsService.emitStatus.subscribe( (status : string) => { 
+      alert(status);
+    });
+  }
+
+  ngOnInit(){
+    this.accounts = this.accountsService.accounts; 
+  }
+
+  
 }

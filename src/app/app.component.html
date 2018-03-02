@@ -1,27 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
-      <button
-        class="btn btn-primary"
-        (click)="onlyOdd = !onlyOdd">Only show odd numbers</button>
-      <br><br>
-      <ul class="list-group"  *appUnless="onlyOdd">
-        <li
-          class="list-group-item" *ngFor = " let n of numbers" > {{ n }}
-        </li>
-        
-      </ul>
-
-      <p appBasicHighlightDirective > Test my Directive </p>
-
-      <p appBetterHighlight [color1] = "'yellow'" [color2] = " 'red' " > This is betterway of creating directive </p>
-
-      <div [ngSwitch] = "value">
-        <p *ngSwitchCase="5"> 5 </p>
-        <p *ngSwitchCase="10"> 10 </p>
-        <p *ngSwitchDefault > Not 10 nor 5 </p>
-      </div>
-      
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <app-new-account (accountAdded)="onAccountAdded($event)"></app-new-account>
+      <hr>
+      <app-account
+        *ngFor="let acc of accounts; let i = index"
+        [account]="acc"
+        [id]="i"
+        (statusChanged)="onStatusChanged($event)"></app-account>
     </div>
   </div>
 </div>
